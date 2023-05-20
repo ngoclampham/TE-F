@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
+import requests
+
 
 app = Flask(__name__)
 
@@ -58,23 +60,26 @@ def signup():
 
 @app.route('/home')
 def home():
-
-    return render_template('home.html')
+    response = requests.get("https://animechan.vercel.app/api/random")
+    json_data = response.json()
+    return render_template('home.html', data=json_data)
 
 @app.route('/login_user' , methods=['POST'])
 def login_user():
+    response = requests.get("https://animechan.vercel.app/api/random")
+    json_data = response.json()
 
     email = request.form['email']
     password = request.form['password']
 
     data = {}
     user = validate_user(email, password)
-
+    
     if user:
-       
         data = {
-            "name": user["name"],
-            "phone": user["phone"]
+            "anime": json_data["anime"],
+            "quote": json_data["quote"],
+            "character" : json_data["character"]
         }
 
         #load home if there is a user, along with data.
@@ -90,6 +95,26 @@ def login_user():
         #no user redirects back to the main login page, with error msg.
         return render_template('index.html', data=data)
 
+@app.route('/another')
+def another():
+    conn = sqlite3.connect('./static/data/activity_monitor.db')
+    curs = conn.cursor()
+    curs.execute('SELECT * FROM underground_spots')
+    data = curs.fetchall()
+
+    # all_spots = []
+    # rows = curs.execute("SELECT * from underground_spots")
+    # for row in rows:
+    #     spot = {'name': row[0],
+    #             'street_add' : row[1], 
+    #             'street_name': row[2],
+    #             'city': row[3],
+    #             'zip': row[4]
+    #             }
+    #     all_spots.append(spot)
+    # conn.close()
+    
+    return render_template('another.html', data=data)
 
 
 @app.route('/post_user' , methods=['POST'])
@@ -111,4 +136,4 @@ def post_user():
     return render_template('index.html', user=new_user)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port='3000')

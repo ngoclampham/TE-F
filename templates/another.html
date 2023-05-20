@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOT HOME</title>
+    <link rel="stylesheet" href="./static/styles.css">
+
+</head>
+<body>
+    <button onclick="window.location.href='home'" class="h2">San Jose Boring</button>
+	<h1>Best money-spending spots in San Jose:</h1>
+	 <div class="main-container"></div>
+    <table>
+		<tr>
+			<th>name</th>
+			<th>street_add</th>
+			<th>street_name</th>
+            <th>city</th>
+            <th>zip</th>
+		</tr>
+		{% for row in data %}
+		<tr>
+			<td>{{ row[0] }}</td>
+			<td>{{ row[1] }}</td>
+			<td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+		</tr>
+		{% endfor %}
+        
+	</table>
+
+<!-- slider container -->
+    <div class="slider">
+
+    <!-- slide 1 -->
+    <div class="slide">
+        <img
+        src="https://s3-media0.fl.yelpcdn.com/bphoto/Pr4N4pwLVAJidUMWQdiKHg/o.jpg"
+        alt=""
+        />
+    </div>
+
+    <!-- slide 2 -->
+    <div class="slide">
+        <img src="https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_1200,q_auto:low,fl_lossy,dpr_2.0,c_fill,f_auto,h_800,g_auto/yqsgqirpkhymwafbxyir" alt="" />
+    </div>
+
+    <!-- slide 3 -->
+    <div class="slide">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Vieira_Park_signage.jpg" alt="" />
+    </div>
+
+    <!-- slide 4 -->
+    <div class="slide">
+        <img src="https://site.robquigley.com/wp-content/uploads/2018/02/BascomCC4513web.jpg" alt="" />
+    </div>
+
+    <!-- slide 5 -->
+    <div class="slide">
+        <img src="https://i.ytimg.com/vi/_Fh0AMC2O7A/maxresdefault.jpg" alt="" />
+        </div>           
+
+    <!-- Control buttons -->
+    <button class="btn btn-next">></button>
+    <button class="btn btn-prev"><
+    </div>
+
+<script>
+console.log('ljl')
+// Select all slides
+const slides = document.querySelectorAll(".slide");
+
+// loop through slides and set each slides translateX
+slides.forEach((slide, indx) => {
+  slide.style.transform = `translateX(${indx * 100}%)`;
+});
+
+// select next slide button
+const nextSlide = document.querySelector(".btn-next");
+
+// current slide counter
+let curSlide = 0;
+// maximum number of slides
+let maxSlide = slides.length - 1;
+
+// add event listener and navigation functionality
+nextSlide.addEventListener("click", function () {
+  // check if current slide is the last and reset current slide
+  if (curSlide === maxSlide) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+
+  //   move slide by -100%
+  slides.forEach((slide, indx) => {
+    slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  });
+});
+
+// select next slide button
+const prevSlide = document.querySelector(".btn-prev");
+
+// add event listener and navigation functionality
+prevSlide.addEventListener("click", function () {
+  // check if current slide is the first and reset current slide to last
+  if (curSlide === 0) {
+    curSlide = maxSlide;
+  } else {
+    curSlide--;
+  }
+
+  //   move slide by 100%
+  slides.forEach((slide, indx) => {
+    slide.style.transform = `translateX(${100 * (indx - curSlide)}%)`;
+  });
+});
+
+</script>
+
+</body>
+</html>

@@ -9,18 +9,21 @@
     
 </head>
 <body>
-    <div class="main-container">
-        
-    
-    <h2>ACTIVITY TRACKER HOME</h1>
-
+    <div class="main-container">    
+    <div class="row">
+    <button onclick="window.location.href='another'" class="flex-button">Food/Flexing Page</button>
+    <button class="flex-button">Serious page</button>
+    </div>
+    <h2>San Jose Boring</h2>
     {%  if data %}
     <p>Welcome!</p>
-    <p>{{ data.name }}</p>
-    <p>{{ data.phone }}</p>
+    <p>{{ data.anime}}</p>
+    <p>{{ data.quote }}</p>
+    <p>{{ data.character}}</p>
 
     {% endif %}
     <p></p>
+    <img src="https://i.imgflip.com/g40z3.jpg?a466272">
 
 </div>
    
