@@ -83,9 +83,9 @@ input{
     height:42px;
 }
 .row {
+    margin-left: 800px;
     display: flex;
     justify-content: right; /* aligns buttons horizontally */
-    align-items: center;     /* aligns buttons vertically */
 }
 .signup{
     font-family:'DM Sans', sans-serif;
@@ -176,4 +176,3 @@ tr:hover {
     top: 45%;
     right: 2%;
   }
-

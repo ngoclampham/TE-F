@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="./static/styles.css">
     
 </head>
+    <div class="row">
+    <button onclick="window.location.href='another'" class="flex-button">Explore</button>
+    <button onclick="window.location.href='post_sugg'" class="flex-button">Suggestion</button>
+
+    </div>
 <body>
     <div class="main-container">    
-    <div class="row">
-    <button onclick="window.location.href='another'" class="flex-button">Food/Flexing Page</button>
-    <button class="flex-button">Serious page</button>
-    </div>
-    <h2>San Jose Boring</h2>
+
+    <button onclick="window.location.href='home'" class="h2">San Jose Boring</button>
     {%  if data %}
     <p>Welcome!</p>
     <p>{{ data.anime}}</p>

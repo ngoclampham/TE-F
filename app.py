@@ -21,6 +21,13 @@ def validate_user(email, password):
     conn.close()
     return user
 
+def store_sugg(name, street_add, street_name, city):
+    conn = sqlite3.connect('./static/data/activity_monitor.db')
+    curs = conn.cursor()
+    curs.execute("INSERT INTO underground_spots (name, street_add, street_name, city) VALUES((?),(?),(?),(?))",
+        (name, street_add, street_name, city))
+    conn.commit()
+    conn.close()
 
 def store_user(name, email, phone, pw):
     conn = sqlite3.connect('./static/data/activity_tracker.db')
@@ -64,7 +71,7 @@ def home():
     json_data = response.json()
     return render_template('home.html', data=json_data)
 
-@app.route('/login_user' , methods=['POST'])
+@app.route('/login_user' , methods=['POST', 'GET'])
 def login_user():
     response = requests.get("https://animechan.vercel.app/api/random")
     json_data = response.json()
@@ -94,6 +101,24 @@ def login_user():
         }
         #no user redirects back to the main login page, with error msg.
         return render_template('index.html', data=data)
+
+@app.route('/post_sugg' , methods=['POST', 'GET'])
+def post_sugg():
+    name= request.form.get('name')
+    street_add= request.form.get('street_add')
+    street_name= request.form.get('street_name')
+    city= request.form.get('city')
+    
+    store_sugg(name, street_add, street_name, city)
+
+    suggs = get_all_users()
+    # print(users)
+
+    #get the last user entered
+    new_sugg = suggs.pop()
+
+    return render_template('contribute.html', sugg=new_sugg)
+
 
 @app.route('/another')
 def another():
@@ -136,4 +161,4 @@ def post_user():
     return render_template('index.html', user=new_user)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port='3000')
+    app.run(debug=True, host='0.0.0.0', port='4000')
