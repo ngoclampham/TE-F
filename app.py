@@ -67,13 +67,13 @@ def signup():
 
 @app.route('/home')
 def home():
-    response = requests.get("https://animechan.vercel.app/api/random")
+    response = requests.get("https://api.kanye.rest")
     json_data = response.json()
     return render_template('home.html', data=json_data)
 
 @app.route('/login_user' , methods=['POST', 'GET'])
 def login_user():
-    response = requests.get("https://animechan.vercel.app/api/random")
+    response = requests.get("https://api.kanye.rest")
     json_data = response.json()
 
     email = request.form['email']
@@ -84,9 +84,7 @@ def login_user():
     
     if user:
         data = {
-            "anime": json_data["anime"],
-            "quote": json_data["quote"],
-            "character" : json_data["character"]
+            "quote": json_data["quote"]
         }
 
         #load home if there is a user, along with data.
