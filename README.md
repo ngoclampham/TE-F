@@ -34,4 +34,4 @@ Progress
 | Challenges | As I've gone through my project, I encountered some problems both in the front end and back end. It goes from database connection, API pulling, and html/css miscellaneous.|
 | Solution | I usually relies on the words of wisdom of my coaches when I face challenges.|
 
-![alt text](image.jpg)
+[video](https://www.youtube.com/watch?v=QfR2YL1NAQw)
